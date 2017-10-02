@@ -13,7 +13,7 @@ r = praw.Reddit (user_agent = "Translator Bot v0.1",
                  username = config.username,
                  password = config.password)
 
-subreddit = r.subreddit("test")
+subreddit = r.subreddit("all")
 count = 0
 
 def translate (phrase, from_language, to_language):
@@ -163,12 +163,12 @@ def reply(comment):
     
     reply += "\n***\n"
 
-    reply += '^(Original Text: "' + translation_tuple[0].origin + '")\n \n' #used single quotes here so I could include double quotes in string
+    reply += '^(Original Text: "' + translation_tuple[0].origin + '")\n \n' # used single quotes here so I could include double quotes in string
     reply += "**Translated from " + languages.code_to_name[translation_tuple[0].src.lower()]
     reply += " to " + languages.code_to_name[translation_tuple[0].dest.lower()]
     reply += ': "' + translation_tuple[0].text + '"**\n'
 
-    if (translation_tuple[0].pronunciation is not None): #check if pronunciation is available
+    if (translation_tuple[0].pronunciation is not None): # check if pronunciation is available
         reply += '*Pronounciation: "' + translation_tuple[0].pronunciation + '"*\n'
 
     reply += "\n***\n"
@@ -178,13 +178,14 @@ def reply(comment):
     return reply
 
 def run_bot():
+    # runs the bot
     for comment in subreddit.stream.comments():	
         timestr = str (time.localtime()[3]) + ":" + str(time.localtime()[4])
         if validate_comment(comment):
             print ("Comment #" + comment.id + " processed at " + timestr + "!")
             print ("Bot's reply to #" + comment.id + ": \n" + reply(comment) + "\n")
 
-while count < 100:
+while count < 100: # stops trying after 100 failed attempts (~300 seconds)
     try:
         print('Starting bot at %s' % (datetime.now()))
         count = 0
