@@ -169,7 +169,7 @@ def reply(comment):
     reply += ': "' + translation_tuple[0].text + '"**\n'
 
     if (translation_tuple[0].pronunciation is not None): # check if pronunciation is available
-        reply += '*Pronunciation: "' + translation_tuple[0].pronunciation + '"*\n'
+        reply += '\n*Pronunciation: "' + translation_tuple[0].pronunciation + '"*\n'
 
     reply += "\n***\n"
     reply += "^(Beep, boop, I'm a bot.) ^[info](https://github.com/hmku/googletranslate-bot)"
