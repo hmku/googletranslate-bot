@@ -69,7 +69,6 @@ def validate_comment(comment):
     if comment.author.name == "GoogleTranslate-Bot":
         print ("Cannot reply to self for comment #" + comment.id)
         return False
-    comment.refresh()
     for child in comment.replies:
         if child.author.name == "GoogleTranslate-Bot":
             print ("Already replied to comment #" + comment.id)
