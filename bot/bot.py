@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 from googletrans import Translator
 
-command = "!translate"
+command = "!googletranslate"
 
 r = praw.Reddit (user_agent = "Translator Bot v0.1",
                  client_id = config.client_id,
@@ -81,11 +81,12 @@ def process_comment(comment):
     # returns a tuple consisting of the original phrase, the translated phrase, the original language, the new language,
     # and two bools that describe whether the specified language was valid
     # plus an that describes whether the parent submission (0), parent comment (1), or a specified phrase (2) was translated
-    comment_words = comment.body.lower().split() #converts comment to list of words to remove spaces
+    comment_words = comment.body.split() #converts comment to list of words to remove spaces
+    comment_lower = comment.body.lower().split()
 
-    translate_index = index_of(comment_words, "!translate")
-    from_index = index_of(comment_words, "from")
-    to_index = index_of(comment_words, "to")
+    translate_index = index_of(comment_lower, "!translate")
+    from_index = index_of(comment_lower, "from")
+    to_index = index_of(comment_lower, "to")
     
     from_language = ""
     to_language = ""
