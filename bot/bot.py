@@ -84,7 +84,7 @@ def process_comment(comment):
     comment_words = comment.body.split() #converts comment to list of words to remove spaces
     comment_lower = comment.body.lower().split()
 
-    translate_index = index_of(comment_lower, "!translate")
+    translate_index = index_of(comment_lower, command)
     from_index = index_of(comment_lower, "from")
     to_index = index_of(comment_lower, "to")
     
@@ -121,7 +121,7 @@ def process_comment(comment):
             phrase = comment.parent().selftext
             phrase_type = 0
     else:
-        # sets phrase to the string between "!translate" and other keywords (or end of comment)
+        # sets phrase to the string between "keyword" and other keywords (or end of comment)
         i = translate_index + 1
         while (i != from_index and i != to_index and i < len(comment_words)):
             phrase += comment_words[i] + " "
@@ -174,7 +174,7 @@ def reply(comment):
     reply += "\n***\n"
     reply += "^(Beep, boop, I'm a bot.) ^[info](https://github.com/hmku/googletranslate-bot)"
 
-    comment.reply(reply)
+    # comment.reply(reply)
     return reply
 
 def run_bot():
