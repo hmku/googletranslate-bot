@@ -2,3 +2,4 @@
 .vscode/
 __pycache__/
 pi@192.168.1.76
+config.py
